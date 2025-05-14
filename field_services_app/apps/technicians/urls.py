@@ -1,14 +1,22 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from . import views
 
-app_name = 'technicians'
+from .views import (
+    TechnicianViewSet,
+    SpecialtyViewSet,
+    CertificationViewSet,
+    TechnicianCostMetricsViewSet,
+    EmploymentTypeKpiReportViewSet
+)
 
 router = DefaultRouter()
-router.register('', views.TechnicianViewSet, basename='technician')
-router.register('skills', views.SkillViewSet, basename='skill')
-router.register('certifications', views.CertificationViewSet, basename='certification')
-router.register('availability', views.TechnicianAvailabilityViewSet, basename='availability')
+router.register(r'technicians', TechnicianViewSet)
+router.register(r'specialties', SpecialtyViewSet)
+router.register(r'certifications', CertificationViewSet)
+router.register(r'cost-metrics', TechnicianCostMetricsViewSet)
+router.register(r'employment-kpi', EmploymentTypeKpiReportViewSet)
+
+app_name = 'technicians'
 
 urlpatterns = [
     path('', include(router.urls)),
